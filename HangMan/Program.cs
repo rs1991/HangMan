@@ -85,6 +85,7 @@ namespace HangMan
 
             int index = random.Next(words.Count);
             Console.WriteLine(words[index]);
+    
         }
 
         static void Main(string[] args)
