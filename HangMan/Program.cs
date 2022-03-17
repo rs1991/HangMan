@@ -5,13 +5,13 @@ namespace HangMan
     internal class Program
     {
 
-        static void drawHangman(int guesses)
+        static void drawHangman(int wrongGuesses)
         {
-            if (guesses == 0)
+            if (wrongGuesses == 0)
             {
                 Console.WriteLine(" ");
             }
-            if (guesses == 1)
+            if (wrongGuesses == 1)
             {
                 Console.WriteLine("  ------");
                 Console.WriteLine("  |     |");
@@ -20,7 +20,7 @@ namespace HangMan
                 Console.WriteLine("        | ");
                 Console.WriteLine("   ====== ");
             }
-            if (guesses == 2)
+            if (wrongGuesses == 2)
             {
                 Console.WriteLine("  ------");
                 Console.WriteLine("  |     |");
@@ -29,7 +29,7 @@ namespace HangMan
                 Console.WriteLine("        | ");
                 Console.WriteLine("   ====== ");
             }
-            if (guesses == 3)
+            if (wrongGuesses == 3)
             {
 
                 Console.WriteLine("  ------");
@@ -40,7 +40,7 @@ namespace HangMan
                 Console.WriteLine("   ====== ");
 
             }
-            if (guesses == 4)
+            if (wrongGuesses == 4)
             {
                 Console.WriteLine("  ------");
                 Console.WriteLine("  |     |");
@@ -49,7 +49,7 @@ namespace HangMan
                 Console.WriteLine("        | ");
                 Console.WriteLine("   ====== ");
             }
-            if (guesses == 5)
+            if (wrongGuesses == 5)
             {
                 Console.WriteLine("  ------");
                 Console.WriteLine("  |     |");
@@ -60,7 +60,7 @@ namespace HangMan
                 Console.WriteLine("   ====== ");
 
             }
-            if (guesses == 6)
+            if (wrongGuesses == 6)
             {
                 Console.WriteLine("  ------");
                 Console.WriteLine("  |     |");
@@ -72,10 +72,28 @@ namespace HangMan
             }
         }
 
-        static void printWord(string secretWord, string letter)
+        static void compareWord(String secretWord, List<char> letter)
         {
 
+            foreach (char c in secretWord)
+            {
+                Console.WriteLine(c);
+            }
+        }
+
+
+
+
+
+        static void Main(string[] args)
+        {
+
+            Console.WriteLine("-------------------");
+            Console.WriteLine("Welcome to Hangman!");
+            Console.WriteLine("-------------------");
+
             var random = new Random();
+
             List<string> words = new List<string>();
             words.Add("Other");
             words.Add("About");
@@ -85,20 +103,11 @@ namespace HangMan
 
             int index = random.Next(words.Count);
             Console.WriteLine(words[index]);
-    
+
+
+
         }
 
-        static void Main(string[] args)
-        {
 
-            Console.WriteLine("-------------------");
-            Console.WriteLine("Welcome to Hangman!");
-            Console.WriteLine("-------------------");
-
-            Console.WriteLine("Guess the secret word");
-            string letter = Console.ReadLine();
-
-            Console.ReadKey();
-        }
     }
 }
