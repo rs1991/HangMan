@@ -74,20 +74,30 @@ namespace HangMan
 
         static void compareWord(String secretWord, List<char> letter)
         {
+            int wrongGuesses = 0;
+            string rightLetter = "";
 
             foreach (char c in secretWord)
             {
-                Console.WriteLine(c);
+                if (letter.Contains(c))
+                {
+                    rightLetter += c;
+                }
+                else
+                {
+
+                    wrongGuesses += 1;
+                    drawHangman(wrongGuesses);
+                }
+
             }
+
         }
-
-
-
 
 
         static void Main(string[] args)
         {
-
+            
             Console.WriteLine("-------------------");
             Console.WriteLine("Welcome to Hangman!");
             Console.WriteLine("-------------------");
@@ -104,10 +114,7 @@ namespace HangMan
             int index = random.Next(words.Count);
             Console.WriteLine(words[index]);
 
-
-
         }
-
 
     }
 }
