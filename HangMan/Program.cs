@@ -6,9 +6,9 @@ namespace HangMan
     {
         static void Main(string[] args)
         {
-            string SecretWord, GuessedLetters;
-            int wrongGuesses = 0, AmountGuesses = 0, RightLetters = 0;
-           
+            string SecretWord, GuessedLetter;
+            int wrongGuesses = 0, AmountGuesses = 0, RightLetters = 0, Lives = 6;
+
 
             Console.WriteLine("-------------------");
             Console.WriteLine("Welcome to Hangman!");
@@ -26,40 +26,51 @@ namespace HangMan
             int index = random.Next(words.Count);
             SecretWord = words[index];
 
-          
             Console.Write("Guess a letter: ");
-            GuessedLetters = Console.ReadLine();
-
+            GuessedLetter = Console.ReadLine();
 
             foreach (char c in SecretWord)
             {
-                if (GuessedLetters.Contains(c))
+                if (GuessedLetter.Contains(c))
                 {
                     Console.Write(c + " ");
                     RightLetters++;
                 }
-                else
+                if (!GuessedLetter.Contains(c))
                 {
                     Console.Write(" ");
+                    wrongGuesses++;
                 }
-                wrongGuesses++;
+
             }
 
             int SecretWordLength = SecretWord.Length;
+            List<char> LettersGuessedByUser = new List<char>();
 
-            while (wrongGuesses != 6 && RightLetters != SecretWordLength)
+            while (wrongGuesses != 6 || RightLetters != SecretWordLength)
             {
                 Console.Write("Guess a letter: ");
-                GuessedLetters = Console.ReadLine();
+                GuessedLetter = Console.ReadLine();
                 AmountGuesses++;
+
+                foreach (char letter in LettersGuessedByUser)
+                {
+                    Console.WriteLine(letter + " ");
+                }
             }
-            if (SecretWord.Contains(GuessedLetters))
+            if (SecretWord.Contains(GuessedLetter))
             {
-                Console.Write(GuessedLetters);
                 RightLetters++;
+                Console.Write(GuessedLetter);
+            }
+
+
+            if (AmountGuesses == Lives)
+            {
+                Console.WriteLine("You lose!");
             }
         }
-    
+
 
         static void DrawHangman(int wrongGuesses)
         {
