@@ -7,10 +7,10 @@ namespace HangMan
         static void Main(string[] args)
         {
             string SecretWord;
-            int RightLetters = 0, Counter = 0, WrongGuesses = 0;
+            int RightLetters = 0, Counter = 0, WrongGuesses = 0, NoGuesses =0;
             char UserGuess;
             List<char> GuessedLetters = new List<char>();
-
+            List<char> RightWord = new List<char>();
 
             Console.WriteLine("-------------------");
             Console.WriteLine("Welcome to Hangman!");
@@ -30,18 +30,17 @@ namespace HangMan
             SecretWord = words[index];
 
             int SecretWordLength = SecretWord.Length;
-           
 
             while (WrongGuesses != 6 && RightLetters != SecretWordLength)
             {
                 Console.Write("Guess a letter: ");
                 UserGuess = Console.ReadLine()[0];
+                GuessedLetters.Add(UserGuess);
 
-                Console.WriteLine("Letters guessed so far: ");
+                Console.Write("Letters guessed so far: ");
                 foreach (char letter in GuessedLetters)
                 {
                     Console.Write(letter + " ");
-
                 }
 
                 foreach (char c in SecretWord)
@@ -50,88 +49,91 @@ namespace HangMan
                     {
                         Console.Write(c + " ");
                         RightLetters++;
-                        GuessedLetters.Add(UserGuess);
-                        
+                        RightWord.Add(UserGuess);
                     }
                     else
                     {
                         Console.Write(" ");
-                        GuessedLetters.Add(UserGuess);
+                        WrongGuesses++;
                     }
-                    Counter++;
-
+                    Counter++;   
                 }
-
-
-
-                //Draws out the hangman 
-                static void DrawHangman(int Wrong)
+                NoGuesses++;
+                if(NoGuesses == 6)
                 {
-                    if (Wrong == 0)
-                    {
-                        Console.WriteLine(" ");
-                    }
-                    if (Wrong == 1)
-                    {
-                        Console.WriteLine("  ------");
-                        Console.WriteLine("  |     |");
-                        Console.WriteLine("  O     |");
-                        Console.WriteLine("        | ");
-                        Console.WriteLine("        | ");
-                        Console.WriteLine("   ====== ");
-                    }
-                    if (Wrong == 2)
-                    {
-                        Console.WriteLine("  ------");
-                        Console.WriteLine("  |     |");
-                        Console.WriteLine("  O     |");
-                        Console.WriteLine("  |     | ");
-                        Console.WriteLine("        | ");
-                        Console.WriteLine("   ====== ");
-                    }
-                    if (Wrong == 3)
-                    {
-
-                        Console.WriteLine("  ------");
-                        Console.WriteLine("  |     |");
-                        Console.WriteLine("  O     |");
-                        Console.WriteLine("//|     | ");
-                        Console.WriteLine("        | ");
-                        Console.WriteLine("   ====== ");
-
-                    }
-                    if (Wrong == 4)
-                    {
-                        Console.WriteLine("  ------");
-                        Console.WriteLine("  |     |");
-                        Console.WriteLine("  O     |");
-                        Console.WriteLine("//|\\   | ");
-                        Console.WriteLine("        | ");
-                        Console.WriteLine("   ====== ");
-                    }
-                    if (Wrong == 5)
-                    {
-                        Console.WriteLine("  ------");
-                        Console.WriteLine("  |     |");
-                        Console.WriteLine("  O     |");
-                        Console.WriteLine("//|\\   | ");
-                        Console.WriteLine("  |     | ");
-                        Console.WriteLine("//      | ");
-                        Console.WriteLine("   ====== ");
-
-                    }
-                    if (Wrong == 6)
-                    {
-                        Console.WriteLine("  ------");
-                        Console.WriteLine("  |     |");
-                        Console.WriteLine("  O     |");
-                        Console.WriteLine("//|\\   | ");
-                        Console.WriteLine("  |     | ");
-                        Console.WriteLine("// \\   | ");
-                        Console.WriteLine("   ====== ");
-                    }
+                    break;
                 }
 
+            }
+
+        }
+
+        //Draws out the hangman
+
+        static void DrawHangman(int Wrong)
+        {
+            if (Wrong == 0)
+            {
+                Console.WriteLine(" ");
+            }
+            if (Wrong == 1)
+            {
+                Console.WriteLine("  ------");
+                Console.WriteLine("  |     |");
+                Console.WriteLine("  O     |");
+                Console.WriteLine("        | ");
+                Console.WriteLine("        | ");
+                Console.WriteLine("   ====== ");
+            }
+            if (Wrong == 2)
+            {
+                Console.WriteLine("  ------");
+                Console.WriteLine("  |     |");
+                Console.WriteLine("  O     |");
+                Console.WriteLine("  |     | ");
+                Console.WriteLine("        | ");
+                Console.WriteLine("   ====== ");
+            }
+            if (Wrong == 3)
+            {
+
+                Console.WriteLine("  ------");
+                Console.WriteLine("  |     |");
+                Console.WriteLine("  O     |");
+                Console.WriteLine("//|     | ");
+                Console.WriteLine("        | ");
+                Console.WriteLine("   ====== ");
+
+            }
+            if (Wrong == 4)
+            {
+                Console.WriteLine("  ------");
+                Console.WriteLine("  |     |");
+                Console.WriteLine("  O     |");
+                Console.WriteLine("//|\\   | ");
+                Console.WriteLine("        | ");
+                Console.WriteLine("   ====== ");
+            }
+            if (Wrong == 5)
+            {
+                Console.WriteLine("  ------");
+                Console.WriteLine("  |     |");
+                Console.WriteLine("  O     |");
+                Console.WriteLine("//|\\   | ");
+                Console.WriteLine("  |     | ");
+                Console.WriteLine("//      | ");
+                Console.WriteLine("   ====== ");
+
+            }
+            if (Wrong == 6)
+            {
+                Console.WriteLine("  ------");
+                Console.WriteLine("  |     |");
+                Console.WriteLine("  O     |");
+                Console.WriteLine("//|\\   | ");
+                Console.WriteLine("  |     | ");
+                Console.WriteLine("// \\   | ");
+                Console.WriteLine("   ====== ");
             }
         }
 
