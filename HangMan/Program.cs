@@ -7,10 +7,9 @@ namespace HangMan
         static void Main(string[] args)
         {
             string SecretWord;
-            int RightLetters = 0, Counter = 0, WrongGuesses = 0, Lives = 6;
+            int RightLetters = 0, WrongLetters = 0, Lives = 6;
             List<char> GuessedLetters = new List<char>();
-            List<char> RightWord = new List<char>();
-
+            
             Console.WriteLine("-------------------");
             Console.WriteLine("Welcome to Hangman!");
             Console.WriteLine("-------------------");
@@ -28,41 +27,41 @@ namespace HangMan
             int index = random.Next(words.Count);
             SecretWord = words[index];
 
-
             int SecretWordLength = SecretWord.Length;
 
-            while (WrongGuesses != 6 && RightLetters != SecretWordLength)
+            while (WrongLetters != 6 && RightLetters != SecretWordLength)
             {
+                
                 Console.Write("Guess a letter: ");
                 char UserGuess = Console.ReadLine()[0];
                 GuessedLetters.Add(UserGuess);
+
+                Console.WriteLine("Letters guessed so far: ");
+                foreach (char letter in GuessedLetters)
+                {
+                    Console.WriteLine(letter + " ");
+                }
 
                 foreach (char c in SecretWord)
                 {
                     if (GuessedLetters.Contains(c))
                     {
                         Console.Write(c + " ");
-                        RightLetters +=1;
+                        RightLetters+=1;
+
                     }
                     else
                     {
-                        Console.Write(" ");
-                        WrongGuesses +=1;   
+                        Console.WriteLine(" ");
                     }
-                    Counter++;
-                }
 
-                Console.Write("Letters guessed so far: ");
-                foreach (char letter in GuessedLetters)
-                {
-                    Console.Write(letter + " ");
                 }
 
                 if (RightLetters == SecretWordLength)
                 {
                     Console.WriteLine("You win!");
                 }
-                if(WrongGuesses == Lives)
+                if (WrongLetters == Lives)
                 {
                     Console.Write("You lose!");
                 }
