@@ -7,9 +7,11 @@ namespace HangMan
         static void Main(string[] args)
         {
             string SecretWord;
-            int RightLetters = 0, WrongLetters = 0, Lives = 6;
+            int RightLetters = 0, WrongLetters = 0, Lives = 6, counter = 0;
             List<char> GuessedLetters = new List<char>();
+            List<char> RightWord = new List<char>();
             
+
             Console.WriteLine("-------------------");
             Console.WriteLine("Welcome to Hangman!");
             Console.WriteLine("-------------------");
@@ -31,31 +33,30 @@ namespace HangMan
 
             while (WrongLetters != 6 && RightLetters != SecretWordLength)
             {
-                
+
                 Console.Write("Guess a letter: ");
                 char UserGuess = Console.ReadLine()[0];
                 GuessedLetters.Add(UserGuess);
 
-                Console.WriteLine("Letters guessed so far: ");
-                foreach (char letter in GuessedLetters)
-                {
-                    Console.WriteLine(letter + " ");
+                if (SecretWord.Contains(UserGuess)){
+
+                    Console.WriteLine(UserGuess + " ");
+                    RightLetters++;
+                    RightWord.Add(UserGuess);
                 }
-
-                foreach (char c in SecretWord)
+                else
                 {
-                    if (GuessedLetters.Contains(c))
-                    {
-                        Console.Write(c + " ");
-                        RightLetters+=1;
-
-                    }
-                    else
-                    {
-                        Console.WriteLine(" ");
-                    }
-
+                    Console.WriteLine(" ");
+                    WrongLetters++;
                 }
+                counter++;
+
+                Console.WriteLine("The right word: ");
+                foreach(char c in RightWord)
+                {
+                    Console.Write(c);
+                }
+                
 
                 if (RightLetters == SecretWordLength)
                 {
@@ -63,7 +64,13 @@ namespace HangMan
                 }
                 if (WrongLetters == Lives)
                 {
-                    Console.Write("You lose!");
+                    Console.WriteLine("You lose!");
+                }
+
+                Console.WriteLine("Letters guessed so far: ");
+                foreach (char letter in GuessedLetters)
+                {
+                    Console.WriteLine(letter + " ");
                 }
             }
         }
