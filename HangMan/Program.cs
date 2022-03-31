@@ -31,22 +31,17 @@ namespace HangMan
 
             int SecretWordLength = SecretWord.Length;
 
-
             while (WrongLetters != 6 && RightLetters != SecretWordLength)
             {
-
                 Console.Write("Guess a letter: ");
                 char UserGuess = Console.ReadLine()[0];
                 GuessedLetters.Add(UserGuess);
 
                 if (SecretWord.Contains(UserGuess))
                 {
-
                     Console.WriteLine(UserGuess + " ");
                     RightLetters++;
                     RightWord.Add(UserGuess);
-
-
                 }
                 else
                 {
@@ -59,9 +54,9 @@ namespace HangMan
 
                 if (RightLetters == SecretWordLength)
                 {
-                    Console.WriteLine("\nThe word was: {0}", SecretWord);
                     Console.WriteLine("You win!");
-
+                    Console.WriteLine("---------------------");
+                    Console.WriteLine("\nThe word was: {0}", SecretWord);
                 }
                 if (WrongLetters == Lives)
                 {
@@ -87,9 +82,10 @@ namespace HangMan
                     {
                         Console.Write("-");
                     }
-
                 }
             }
+            Console.WriteLine("Thanks for playing :)");
+            Console.ReadKey();
         }
 
         //Draws out the hangman
@@ -163,11 +159,3 @@ namespace HangMan
 
     }
 }
-
-
-
-//while game is not game over
-//get the guessed letter
-//check if the guessed letter is in the secret word
-//keep track of wrongGuesses
-//deopending on that do dofferent outputs
