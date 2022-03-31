@@ -31,6 +31,7 @@ namespace HangMan
 
             int SecretWordLength = SecretWord.Length;
 
+
             while (WrongLetters != 6 && RightLetters != SecretWordLength)
             {
 
@@ -60,7 +61,7 @@ namespace HangMan
                 {
                     Console.WriteLine("\nThe word was: {0}", SecretWord);
                     Console.WriteLine("You win!");
-                    
+
                 }
                 if (WrongLetters == Lives)
                 {
@@ -76,6 +77,18 @@ namespace HangMan
                 }
 
                 Console.WriteLine("You current progress: ");
+                foreach (char c in SecretWord)
+                {
+                    if (GuessedLetters.Contains(c))
+                    {
+                        Console.Write(c + " ");
+                    }
+                    else
+                    {
+                        Console.Write("-");
+                    }
+
+                }
             }
         }
 
