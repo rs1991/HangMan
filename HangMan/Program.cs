@@ -10,7 +10,7 @@ namespace HangMan
             int RightLetters = 0, WrongLetters = 0, Lives = 6, counter = 0;
             List<char> GuessedLetters = new List<char>();
             List<char> RightWord = new List<char>();
-            
+
 
             Console.WriteLine("-------------------");
             Console.WriteLine("Welcome to Hangman!");
@@ -38,33 +38,35 @@ namespace HangMan
                 char UserGuess = Console.ReadLine()[0];
                 GuessedLetters.Add(UserGuess);
 
-                if (SecretWord.Contains(UserGuess)){
+                if (SecretWord.Contains(UserGuess))
+                {
 
                     Console.WriteLine(UserGuess + " ");
                     RightLetters++;
                     RightWord.Add(UserGuess);
+
+
                 }
                 else
                 {
                     Console.WriteLine(" ");
                     WrongLetters++;
+                    DrawHangman(WrongLetters);
                 }
                 counter++;
 
-                Console.WriteLine("The right word: ");
-                foreach(char c in RightWord)
-                {
-                    Console.Write(c);
-                }
-                
 
                 if (RightLetters == SecretWordLength)
                 {
+                    Console.WriteLine("\nThe word was: {0}", SecretWord);
                     Console.WriteLine("You win!");
+                    
                 }
                 if (WrongLetters == Lives)
                 {
                     Console.WriteLine("You lose!");
+                    Console.WriteLine("---------------------");
+                    Console.WriteLine("\nThe correct word was: {0}", SecretWord);
                 }
 
                 Console.WriteLine("Letters guessed so far: ");
@@ -72,12 +74,14 @@ namespace HangMan
                 {
                     Console.WriteLine(letter + " ");
                 }
+
+                Console.WriteLine("You current progress: ");
             }
         }
 
         //Draws out the hangman
 
-        private static void DrawHangman(int Wrong)
+        static void DrawHangman(int Wrong)
         {
             if (Wrong == 0)
             {
@@ -146,6 +150,7 @@ namespace HangMan
 
     }
 }
+
 
 
 //while game is not game over
