@@ -7,9 +7,9 @@ namespace HangMan
         static void Main(string[] args)
         {
             string SecretWord;
-            int RightLetters = 0, WrongLetters = 0, Lives = 6, counter = 0;
+            int RightLetters = 0, WrongLetters = 0, Lives = 6;
             List<char> GuessedLetters = new List<char>();
-            List<char> RightWord = new List<char>();
+            //List<char> RightWord = new List<char>();
 
 
             Console.WriteLine("-------------------");
@@ -20,11 +20,12 @@ namespace HangMan
             var random = new Random();
 
             List<string> words = new List<string>();
-            words.Add("hang");
-            words.Add("about");
-            words.Add("faith");
-            words.Add("maybe");
-            words.Add("tape");
+            words.Add("latte");
+            words.Add("funny");
+            words.Add("class");
+            words.Add("chill");
+            words.Add("bless");
+            words.Add("pleasure");
 
             int index = random.Next(words.Count);
             SecretWord = words[index];
@@ -39,18 +40,15 @@ namespace HangMan
 
                 if (SecretWord.Contains(UserGuess))
                 {
-                    Console.WriteLine(UserGuess + " ");
+                    //Console.WriteLine(UserGuess + " ");
                     RightLetters++;
-                    RightWord.Add(UserGuess);
                 }
                 else
                 {
-                    Console.WriteLine(" ");
                     WrongLetters++;
                     DrawHangman(WrongLetters);
                 }
-                counter++;
-
+            
 
                 if (RightLetters == SecretWordLength)
                 {
@@ -89,7 +87,6 @@ namespace HangMan
         }
 
         //Draws out the hangman
-
         static void DrawHangman(int Wrong)
         {
             if (Wrong == 0)
