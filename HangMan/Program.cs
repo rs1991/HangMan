@@ -9,7 +9,10 @@ namespace HangMan
             string SecretWord;
             int RightLetters = 0, WrongLetters = 0, Lives = 6;
             List<char> GuessedLetters = new List<char>();
-            //List<char> RightWord = new List<char>();
+            
+            char delim = ',';
+
+            string RightWord = String.Join(delim, GuessedLetters);
 
 
             Console.WriteLine("-------------------");
@@ -40,7 +43,6 @@ namespace HangMan
 
                 if (SecretWord.Contains(UserGuess))
                 {
-                    //Console.WriteLine(UserGuess + " ");
                     RightLetters++;
                 }
                 else
@@ -48,9 +50,9 @@ namespace HangMan
                     WrongLetters++;
                     DrawHangman(WrongLetters);
                 }
-            
 
-                if (RightLetters == SecretWordLength)
+
+                if (SecretWord==RightWord)
                 {
                     Console.WriteLine("You win!");
                     Console.WriteLine("---------------------");
@@ -153,6 +155,5 @@ namespace HangMan
                 Console.WriteLine("   ====== ");
             }
         }
-
     }
 }
