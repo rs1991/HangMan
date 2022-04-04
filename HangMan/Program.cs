@@ -9,17 +9,13 @@ namespace HangMan
             string SecretWord;
             int RightLetters = 0, WrongLetters = 0, Lives = 6;
             List<char> GuessedLetters = new List<char>();
-            
-            char delim = ',';
-
-            string RightWord = String.Join(delim, GuessedLetters);
+            string RightWord = "";
 
 
             Console.WriteLine("-------------------");
             Console.WriteLine("Welcome to Hangman!");
             Console.WriteLine("-------------------");
 
-            // Picks a random word from the list
             var random = new Random();
 
             List<string> words = new List<string>();
@@ -27,7 +23,7 @@ namespace HangMan
             words.Add("funny");
             words.Add("class");
             words.Add("chill");
-            words.Add("bless");
+            words.Add("blessing");
             words.Add("pleasure");
 
             int index = random.Next(words.Count);
@@ -35,7 +31,7 @@ namespace HangMan
 
             int SecretWordLength = SecretWord.Length;
 
-            while (WrongLetters != 6 && RightLetters != SecretWordLength)
+            while (WrongLetters != 6)
             {
                 Console.Write("Guess a letter: ");
                 char UserGuess = Console.ReadLine()[0];
@@ -52,36 +48,38 @@ namespace HangMan
                 }
 
 
-                if (SecretWord==RightWord)
-                {
-                    Console.WriteLine("You win!");
-                    Console.WriteLine("---------------------");
-                    Console.WriteLine("\nThe word was: {0}", SecretWord);
-                }
-                if (WrongLetters == Lives)
-                {
-                    Console.WriteLine("You lose!");
-                    Console.WriteLine("---------------------");
-                    Console.WriteLine("\nThe correct word was: {0}", SecretWord);
-                }
-
                 Console.WriteLine("Letters guessed so far: ");
                 foreach (char letter in GuessedLetters)
                 {
-                    Console.WriteLine(letter + " ");
+                    Console.Write(letter + " ");
                 }
 
-                Console.WriteLine("You current progress: ");
+                Console.WriteLine("\nYou current progress: ");
+                RightWord = "";
                 foreach (char c in SecretWord)
                 {
                     if (GuessedLetters.Contains(c))
                     {
                         Console.Write(c + " ");
+                        RightWord = RightWord + c;
                     }
                     else
                     {
                         Console.Write("-");
                     }
+                }
+
+                if (SecretWord == RightWord)
+                {
+                    Console.WriteLine("\nYou win!");
+                    Console.WriteLine("---------------------");
+                    Console.WriteLine($"\nThe word was: {SecretWord}");
+                }
+                if (WrongLetters == Lives)
+                {
+                    Console.WriteLine("\nYou lose!");
+                    Console.WriteLine("---------------------");
+                    Console.WriteLine($"\nThe correct word was: {SecretWord}");
                 }
             }
             Console.WriteLine("Thanks for playing :)");
